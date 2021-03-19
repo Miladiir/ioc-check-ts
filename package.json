@@ -1,0 +1,26 @@
+{
+  "name": "ioc-check",
+  "version": "1.0.0",
+  "description": "Checks for you, if your dependency injection worked.",
+  "main": "dist/index.js",
+  "scripts": {
+    "test": "nyc mocha"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Miladiir/ioc-check-ts.git"
+  },
+  "keywords": [
+    "ioc",
+    "dependency-injection",
+    "typescript",
+    "typescript-ioc",
+    "inversion-of-control"
+  ],
+  "author": "Oliver Conzen",
+  "license": "Unlicense",
+  "bugs": {
+    "url": "https://github.com/Miladiir/ioc-check-ts/issues"
+  },
+  "homepage": "https://github.com/Miladiir/ioc-check-ts#readme"
+}
