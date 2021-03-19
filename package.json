@@ -2,9 +2,13 @@
   "name": "ioc-check",
   "version": "1.0.0",
   "description": "Checks for you, if your dependency injection worked.",
-  "main": "dist/index.js",
+  "main": "./dist",
+  "types": "./dist",
   "scripts": {
-    "test": "nyc mocha"
+    "test": "nyc mocha --parallel",
+    "typecheck": "tsc",
+    "build": "tsc -b tsconfig.prod.json",
+    "prepublishOnly": "npm run build"
   },
   "repository": {
     "type": "git",
@@ -22,5 +26,18 @@
   "bugs": {
     "url": "https://github.com/Miladiir/ioc-check-ts/issues"
   },
-  "homepage": "https://github.com/Miladiir/ioc-check-ts#readme"
+  "homepage": "https://github.com/Miladiir/ioc-check-ts#readme",
+  "dependencies": {},
+  "devDependencies": {
+    "@types/chai": "^4.2.15",
+    "@types/mocha": "^8.2.1",
+    "chai": "^4.3.4",
+    "mocha": "^8.3.2",
+    "nyc": "^15.1.0",
+    "ts-node": "^9.1.1",
+    "typescript": "^4.2.3"
+  },
+  "files": [
+    "dist"
+  ]
 }
