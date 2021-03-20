@@ -19,16 +19,14 @@ I therefore generalized the problem and here we are.
 ## Usage
 
 Currently there is only one flavour of injection checks.
-`throwIfMatches` will throw an error if an instance of a class matches a class that is known not to be correct.
+`throwIfMatches` will throw an error if an instance of a class matches a class that is known to be incorrect one.
 
 The general usage is as follows:
 
 ```javascript
-class A {
-}
+class A {}
 
-class B extends A {
-}
+class B extends A {}
 
 const {throwIfMatches} = require("ioc-check");
 
