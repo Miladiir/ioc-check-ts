@@ -109,7 +109,7 @@ Both are generated from the typescript source code.
 
 **ioc-check** follows [Semantic Versioning 2.0.0](https://semver.org/#semantic-versioning-200).
 This means that you can decide based on the version number of the package if manual update intervention is required.
-Head over to [Github Releases](https://github.com/Miladiir/ioc-check-ts/releases) or check the Changelog.md for changes between versions.
+Head over to [Github Releases](https://github.com/Miladiir/ioc-check-ts/releases) or check the CHANGELOG file for changes between versions.
 In most cases *npm* will take care of updates for you automatically with `npm update` or an alternative of your choice.
 
 (Not Recommended)

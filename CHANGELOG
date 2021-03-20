@@ -1,0 +1,9 @@
+Tag v1.0.1:
+Documentation:
+- Added some basic documentation for `throwIfMatches` to README.md
+
+Tag v1.0.0:
+Features:
+- Added `throwIfMatches`, a flavour of failed dependency injection detection which will throw an error if an instance matches a class that is known to not be the expected one
+- Added typescript types for the constructors of classes that are possibly abstract and for ones that are definetly instantiable `Constructor` and `InstantiableConstructor`
+- Added a custom error type `DependencyInjectionError`
