@@ -1,6 +1,6 @@
 {
   "name": "ioc-check",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Checks for you, if your dependency injection worked.",
   "main": "./dist",
   "types": "./dist",
