@@ -1,6 +1,6 @@
 # IOC-Check
 
-[![GitHub Workflow Status](https://img.shields.io/github/workflow/status/miladiir/ioc-check-ts/Node.js%20CI)](https://github.com/Miladiir/ioc-check-ts/actions/workflows/node.js.yml?query=branch%3Amainn) [![npm](https://img.shields.io/npm/v/ioc-check)](https://www.npmjs.com/package/ioc-check)
+[![GitHub Workflow Status](https://img.shields.io/github/workflow/status/miladiir/ioc-check-ts/Node.js%20CI)](https://github.com/Miladiir/ioc-check-ts/actions/workflows/node.js.yml?query=branch%3Amain) [![npm](https://img.shields.io/npm/v/ioc-check)](https://www.npmjs.com/package/ioc-check)
 
 Runtime checks to catch dependency injection configuration errors.
 
