@@ -1,7 +1,7 @@
 {
   "name": "ioc-check",
   "version": "1.0.1",
-  "description": "Checks for you, if your dependency injection worked.",
+  "description": "Runtime checks for error free dependency injection.",
   "main": "./dist",
   "types": "./dist",
   "scripts": {
@@ -27,6 +27,7 @@
     "url": "https://github.com/Miladiir/ioc-check-ts/issues"
   },
   "homepage": "https://github.com/Miladiir/ioc-check-ts#readme",
+  "funding": "https://github.com/sponsors/Miladiir",
   "dependencies": {},
   "devDependencies": {
     "@types/chai": "^4.2.15",
