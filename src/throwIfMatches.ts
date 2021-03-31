@@ -1,5 +1,5 @@
 import {DependencyInjectionError} from "./errors/DependencyInjectionError";
-import {Constructable} from "./types/Constructable";
+import type {Constructable} from "./types/Constructable";
 
 /**
  * Throws an error if the instance is an instance of the class and not of a subclass.
