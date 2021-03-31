@@ -15,6 +15,8 @@ import {Constructable} from "./types/Constructable";
  * @typeParam Type The actual type (prototype) of the class and class instance.
  */
 function throwIfMatches<Type>(instance: Type, constructor: Constructable<Type>): void {
+    // Compare the prototypes if the instance and the class.
+    // If they match exactly it is a direct instantiation.
     if (Object.getPrototypeOf(instance) === constructor.prototype) {
         throw new DependencyInjectionError(constructor);
     }
