@@ -8,7 +8,7 @@ export class ASubClass extends AnAbstractClass {
     /**
      * @inheritDoc
      */
-    public do() {
-        console.log("Did it! 🚀");
+    public do(): void {
+        // or don't
     }
 }

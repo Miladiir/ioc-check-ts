@@ -1,5 +1,5 @@
-import {CustomError} from "./";
-import {Constructable} from "../types";
+import {CustomError} from "./CustomError";
+import {Constructable} from "../types/Constructable";
 
 /**
  * Error that is emitted if a dependency injection failed.
