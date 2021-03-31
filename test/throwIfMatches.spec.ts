@@ -1,6 +1,6 @@
 import {expect} from "chai";
 
-import {DependencyInjectionError, throwIfMatches} from "../src";
+import {DependencyInjectionError, throwIfMatches} from "../src/throwIfMatches";
 
 import {AnAbstractClass} from "./testClasses/AnAbstractClass";
 import {ANonAbstractClass} from "./testClasses/ANonAbstractClass";
