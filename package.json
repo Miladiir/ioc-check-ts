@@ -1,6 +1,6 @@
 {
   "name": "ioc-check",
-  "version": "1.0.1",
+  "version": "2.0.0",
   "description": "Runtime checks for error free dependency injection.",
   "main": "./dist",
   "types": "./dist",
