@@ -4,6 +4,14 @@
 
 Runtime checks to catch dependency injection configuration errors.
 
+### Table of contents
+- [Motivation](#motivation)
+- [Usage](#usage)
+    + [`throwIfMatches`](#throwifmatches)
+    + [`noDirectInstantiation`](#nodirectinstantiation)
+- [Installation](#installation)
+- [Updates](#updates)
+
 ## Motivation
 
 Dependency injection or inversion of control frameworks are awesome 99% of the time.
@@ -18,9 +26,15 @@ I therefore generalized the problem and here we are.
 
 ## Usage
 
-Currently there is only one flavour of injection checks.
-`throwIfMatches` will throw an error if an instance of a class matches a class that is known to be incorrect one.
+Currently, there are two flavours of injection checks:
+ - [`throwIfMatches`](#throwifmatches) will throw an error if an instance of a class matches a class that is known to be incorrect one. Use this check whenever you need to be certain that you injected the correct class.
+ - [`noDirectInstantiation`](#nodirectinstantiation) is a class decorator that adds a runtime check against direct instantiation. The class becomes an abstract class during runtime.
 
+The usage of these approaches can be mixed.
+My suggestion would be to use `noDirectInstantiation` in conjunction with good documentation about its behaviour. The usage of abstract classes in your codebase might also help prevent unexpected behaviour.
+`throwIfMatches` is the more verbose and configurable variant of the two.
+
+### `throwIfMatches`
 The general usage is as follows:
 
 ```javascript
@@ -28,7 +42,7 @@ class A {}
 
 class B extends A {}
 
-const {throwIfMatches} = require("ioc-check");
+const {throwIfMatches} = require("ioc-check/throwIfMatches");
 
 const instance1 = new B(); // or create an instance any other way
 const instance2 = new A(); // e.g. ioc and dep-inj
@@ -47,8 +61,8 @@ exactly. Thus, a `DependencyInjectionError` will be thrown.
 An example that is perhaps more realistic is as follows:
 
 ```typescript
-import {throwIfMatches} from "ioc-check";
-import {Inject, Container} from "typescript-ioc";
+import {throwIfMatches} from "ioc-check/throwIfMatches";
+import {Inject} from "typescript-ioc";
 
 abstract class Fruit {
     abstract takeABite();
@@ -70,8 +84,8 @@ class Human {
 }
 ```
 
-In this example we use `ioc-check` to check if the dependency injection by the popular `typescript-ioc` worked as
-expected. Depending on how our ioc is configured, we could bind `Apple` to `Fruit` or let `Fruit` unbound. The latter
+In this example we use **ioc-check** to check if the dependency injection by the popular **typescript-ioc** worked as
+expected. Depending on how our ioc is configured, we could bind `Apple` to `Fruit` or leave `Fruit` unbound. The latter
 could for example be the case in unit tests, or when developing new components for the existing application. Explicit
 checks for the correct configuration are oftentimes required to catch oversights. In our example above, we would not
 want to let `Fruit` be unbound, since we apparently need instances of the class to do something in `Human`. Thus the
@@ -98,19 +112,90 @@ have been populated with a new `Fruit` object. In this example an instantiation 
 nonsensical, since `Fruit` should only be instantiated through subclasses. Thankfully, our manual check
 with `throwIfMatches` caught this potential bug.
 
+One downside of this approach to dependency injection checks is that you have to manually test for the correct or
+incorrect class. There is no built-in guarantee that you did not forget to check your classes.
+To save yourself some time and the headache of manual test, check out `noDirectInstantiation`.
+
+### `noDirectInstantiation`
+
+Instead of adding these checks everywhere you need them, why not simply add the check to the class itself?
+This is exactly what the class decorator function `noDirectInstantiation` does.
+It essentially makes a class abstract during runtime.
+
+The usage is pretty simple and much less verbose than the usage of `throwIfMatches` once you figure out how to enable 
+decorator functions for your use case.
+If you are using TypeScript, it is as easy as setting the configuration parameter `enableExperimentalDecorators` to `true`.
+
+Let's revisit the example from before but slightly modified:
+```typescript
+import {noDirectInstantiation} from "ioc-check/noDirectInstantiation";
+
+@noDirectInstantiation // add this decorator to prevent direct instantiation
+abstract class Fruit {
+    abstract takeABite();
+}
+
+class Apple extends Fruit {
+    takeABite() {
+       console.log("yummy 👌 nomnom 😊"); 
+    }
+}
+
+new Apple(); // this is fine
+// @ts-expect-error TypeScript does not like it when you instantiate an abstract class
+new Fruit(); // throws DependencyInjectionError reason Fruit
+```
+
+`Fruit` cannot be directly instantiated after applying the decorator, only by extending it and then instantiating
+the subclass.
+Just like `throwIfMatches`, this is a very useful sanity check during runtime, especially in conjunction with
+**typescript-ioc** or other dependency injection frameworks.
+Since they do not know about abstract classes during runtime - this piece of information is lost after compiling - they
+will happily create instances of your abstract classes.
+With the addition of the decorator, they will however not be able to do so anymore.
+
+```typescript
+import {Inject} from "typescript-ioc";
+
+class Human {
+    private readonly food: Fruit;
+
+    constructor(@Inject somethingToEat: Fruit) {
+        this.food = somethingToEat;
+    }
+}
+```
+
+Depending on how `Fruit` is bound, its instantiation through **typescript-ioc** will now produce a runtime error, just
+like in the example of `throwIfMatches`.
+If `Fruit` is instantiated directly, it will now produce a runtime Error:
+
+```
+DependencyInjectionError: Fruit
+  at [...]
+```
+
+The advantage of this approach is also it's biggest downside.
+While you only have to configure this behaviour once and not explicitly check for the instances class type before usage,
+this behaviour is also less apparent and slightly obscured.
+It is also less flexible, since you might have cases where you can ignore the correct or incorrect instantiation.
+For a more verbose, configurable but less robus approach, check out `throwIfMatches`.
+
 ## Installation
 
 `npm i --save ioc-check`
 
-The [npm package](https://www.npmjs.com/package/ioc-check) contains the transpiled code and typescript typings.
-Both are generated from the typescript source code.
+The [npm package](https://www.npmjs.com/package/ioc-check) contains the transpiled JavaScript code and TypeScript typings.
+Both are generated from the TypeScript source code.
+You do not need TypeScript to use this package.
 
 ## Updates
 
 **ioc-check** follows [Semantic Versioning 2.0.0](https://semver.org/#semantic-versioning-200).
 This means that you can decide based on the version number of the package if manual update intervention is required.
-Head over to [Github Releases](https://github.com/Miladiir/ioc-check-ts/releases) or check the CHANGELOG file for changes between versions.
+Head over to [Github Releases](https://github.com/Miladiir/ioc-check-ts/releases) or check the CHANGELOG file for
+changes between versions.
 In most cases *npm* will take care of updates for you automatically with `npm update` or an alternative of your choice.
 
-(Not Recommended)
+(Not recommended)
 `npm i --save ioc-check@latest` will force the package to the latest version in any case.
