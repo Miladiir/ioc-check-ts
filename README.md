@@ -1,6 +1,6 @@
 # IOC-Check
 
-[![GitHub Workflow Status](https://img.shields.io/github/workflow/status/miladiir/ioc-check-ts/Node.js%20CI)](https://github.com/Miladiir/ioc-check-ts/actions/workflows/node.js.yml?query=branch%3Amain) [![npm](https://img.shields.io/npm/v/ioc-check)](https://www.npmjs.com/package/ioc-check)
+[![GitHub Workflow Status](https://img.shields.io/github/workflow/status/miladiir/ioc-check-ts/Node.js%20CI)](https://github.com/Miladiir/ioc-check-ts/actions/workflows/node.js.yml?query=branch%3Amain) [![License](https://img.shields.io/npm/l/ioc-check)](https://github.com/Miladiir/ioc-check-ts/blob/main/LICENSE) [![NPM](https://img.shields.io/npm/v/ioc-check)](https://www.npmjs.com/package/ioc-check) [![Sponsors](https://img.shields.io/github/sponsors/Miladiir)](https://github.com/sponsors/Miladiir)
 
 Runtime checks to catch dependency injection configuration errors.
 
@@ -11,6 +11,11 @@ Runtime checks to catch dependency injection configuration errors.
     + [`noDirectInstantiation`](#nodirectinstantiation)
 - [Installation](#installation)
 - [Updates](#updates)
+
+### License & Support
+
+This package is licensed under the Unlicense.
+Please consider supporting me and my projects by becoming [a sponsor](https://github.com/sponsors/Miladiir).
 
 ## Motivation
 
