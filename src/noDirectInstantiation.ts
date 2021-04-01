@@ -21,10 +21,10 @@ import {DependencyInjectionError} from "./errors/DependencyInjectionError";
  */
 function noDirectInstantiation(constructable: any): any {
 
-    const name = constructable.name;
-    const map: Record<string, any> = {};
+    const className = constructable.name;
+    const classMap: Record<string, typeof constructable> = {};
     // Trick to de-anonymize an anonymous class. We reuse the targets class name.
-    map[name] = class extends constructable {
+    classMap[className] = class extends constructable {
 
         /**
          * Instantiate a new proxy class. This will be done automatically when a class
@@ -36,13 +36,13 @@ function noDirectInstantiation(constructable: any): any {
             // Compare the constructor functions of the new() Target and this anonymous class.
             // If they match exactly, this anonymous class was instantiated directly.
             // Since it proxies the original class, the latter was tried to be instantiated directly.
-            if (new.target === map[name]) {
+            if (new.target === classMap[className]) {
                 throw new DependencyInjectionError(constructable);
             }
         }
     }
 
-    return map[name];
+    return classMap[className];
 }
 
 export {DependencyInjectionError, noDirectInstantiation};
