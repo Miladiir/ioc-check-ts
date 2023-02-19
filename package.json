@@ -28,7 +28,6 @@
   },
   "homepage": "https://github.com/Miladiir/ioc-check-ts#readme",
   "funding": "https://github.com/sponsors/Miladiir",
-  "dependencies": {},
   "devDependencies": {
     "@types/chai": "^4.2.15",
     "@types/mocha": "^10.0.1",
