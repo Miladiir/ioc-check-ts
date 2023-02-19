@@ -19,7 +19,7 @@ import {DependencyInjectionError} from "./errors/DependencyInjectionError";
  * ```
  * @param constructable The class that should not be instantiated directly
  */
-function noDirectInstantiation(constructable: any, _context: ClassDecoratorContext): any {
+function noDirectInstantiation(constructable: any, _context?: ClassDecoratorContext): any {
 
     const className = constructable.name;
     const classMap: Record<string, typeof constructable> = {};
