@@ -22,7 +22,7 @@
     "inversion-of-control"
   ],
   "author": "Oliver Conzen",
-  "license": "Unlicense",
+  "license": "MIT",
   "bugs": {
     "url": "https://github.com/Miladiir/ioc-check-ts/issues"
   },
