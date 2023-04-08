@@ -14,7 +14,7 @@ Runtime checks to catch dependency injection configuration errors.
 
 ### License & Support
 
-This package is licensed under the Unlicense.
+This package is licensed under the MIT license.
 Please consider supporting me and my projects by becoming [a sponsor](https://github.com/sponsors/Miladiir).
 
 ## Motivation
@@ -193,6 +193,8 @@ For a more verbose, configurable but less robus approach, check out `throwIfMatc
 The [npm package](https://www.npmjs.com/package/ioc-check) contains the transpiled JavaScript code and TypeScript typings.
 Both are generated from the TypeScript source code.
 You do not need TypeScript to use this package.
+
+Both flavors of decorators in TypeScript are supported: *experimental* and *TC39 proposal*, available from `typescript@^5`.
 
 ## Updates
 
